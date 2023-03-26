@@ -1,3 +1,4 @@
+import 'package:air_pollution/Screens/admin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Components/TextField/text_field.dart';
 import 'Package:flutter/material.dart';
@@ -10,21 +11,92 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+enum AuthStatus {
+  successful,
+  wrongPassword,
+  emailAlreadyExists,
+  invalidEmail,
+  weakPassword,
+  unknown,
+}
+
+class AuthExceptionHandler {
+  static handleAuthException(FirebaseAuthException e) {
+    AuthStatus status;
+    switch (e.code) {
+      case "invalid-email":
+        status = AuthStatus.invalidEmail;
+        break;
+      case "wrong-password":
+        status = AuthStatus.wrongPassword;
+        break;
+      case "weak-password":
+        status = AuthStatus.weakPassword;
+        break;
+      case "email-already-in-use":
+        status = AuthStatus.emailAlreadyExists;
+        break;
+      default:
+        status = AuthStatus.unknown;
+    }
+    return status;
+  }
+
+  static String generateErrorMessage(error) {
+    String errorMessage;
+    switch (error) {
+      case AuthStatus.invalidEmail:
+        errorMessage = "Your email address appears to be malformed.";
+        break;
+      case AuthStatus.weakPassword:
+        errorMessage = "Your password should be at least 6 characters.";
+        break;
+      case AuthStatus.wrongPassword:
+        errorMessage = "Your email or password is wrong.";
+        break;
+      case AuthStatus.emailAlreadyExists:
+        errorMessage =
+            "The email address is already in use by another account.";
+        break;
+      default:
+        errorMessage = "An error occured. Please try again later.";
+    }
+    return errorMessage;
+  }
+}
+
 class _LoginScreenState extends State<LoginScreen> {
   final emailIdController = TextEditingController();
 
   final passController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
+  static late AuthStatus _status;
+
+  Future<AuthStatus> resetPassword({required String email}) async {
+    await _auth
+        .sendPasswordResetEmail(email: email)
+        .then((value) => _status = AuthStatus.successful)
+        .catchError(
+            (e) => _status = AuthExceptionHandler.handleAuthException(e));
+    return _status;
+  }
 
   void userSignIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(child: CircularProgressIndicator());
-        });
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailIdController.text.trim(),
-        password: passController.text.trim());
-    Navigator.pop(context);
+    if (emailIdController.text.trim() == "admin@admin.com" &&
+        passController.text.trim() == "admin123") {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AdminScreen()));
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(child: CircularProgressIndicator());
+          });
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailIdController.text.trim(),
+          password: passController.text.trim());
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -153,7 +225,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         fontSize: 18),
                                   )),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    resetPassword(
+                                        email: emailIdController.text.trim());
+                                  },
                                   child: const Text(
                                     "forget Password",
                                     style: TextStyle(
