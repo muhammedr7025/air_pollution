@@ -1,20 +1,21 @@
+import 'package:air_pollution/Components/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../UserDetails/UserName.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class UsersList extends StatefulWidget {
+  const UsersList({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UsersList> createState() => _UsersListState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UsersListState extends State<UsersList> {
   late Future future;
   DocumentReference<Map<String, dynamic>> usId =
       FirebaseFirestore.instance.collection("users").doc();
-  final userId = FirebaseAuth.instance.currentUser!;
+
   List<String> userDetails = [];
 
   Future getUserDetail() async {
@@ -42,17 +43,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text(
-          "LOGGED IN AS: ${userId.email!}",
-          style: const TextStyle(fontSize: 20),
-        ),
         backgroundColor: Colors.grey[900],
-        actions: [
-          IconButton(
-            onPressed: signUserOut,
-            icon: const Icon(Icons.logout),
-          )
-        ],
       ),
       body: Column(
         children: [
@@ -66,8 +57,13 @@ class _HomePageState extends State<HomePage> {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          leading: const CircleAvatar(child: Text("A")),
-                          tileColor: Colors.purple[300],
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          dense: true,
+                          visualDensity: const VisualDensity(vertical: 3),
+                          leading: const Icon(Icons.person_2),
+                          tileColor: primaryclr,
                           title: UserName(
                             userId: userDetails[index],
                           ),

@@ -17,9 +17,10 @@ class UserName extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
+
             return Column(
               children: [
-                Text('Name : ${data['Name']}'),
+                Text('Name : ${data['Name ']}'),
                 Text('Email : ${data['email']}'),
               ],
             );

@@ -14,7 +14,6 @@ class CommunityHomePage extends StatefulWidget {
 class _CommunityHomePageState extends State<CommunityHomePage> {
   late Future future;
 //  DocumentReference<Map<String, dynamic>> usId = FirebaseFirestore.instance.collection("users").doc();
-  final userId = FirebaseAuth.instance.currentUser!;
   List<String> postsDetails = [];
 
   Future getUserDetail() async {
@@ -42,10 +41,6 @@ class _CommunityHomePageState extends State<CommunityHomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text(
-          "LOGGED IN AS: ${userId.email!}",
-          style: const TextStyle(fontSize: 20),
-        ),
         backgroundColor: Colors.grey[900],
         actions: [
           IconButton(

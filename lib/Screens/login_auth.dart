@@ -1,3 +1,4 @@
+import 'package:air_pollution/Screens/users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'communiy_homepage.dart';
@@ -16,7 +17,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
           // user is logged in
           if (snapshot.hasData) {
-            return const CommunityHomePage();
+            return const UsersList();
           }
 
           // user is NOT logged in
