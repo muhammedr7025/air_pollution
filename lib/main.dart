@@ -1,12 +1,9 @@
-import 'package:air_pollution/Screens/admin_screen.dart';
 import 'package:air_pollution/Screens/pollution.dart';
 import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
-
-import 'Screens/login_auth.dart';
+import 'Screens/pollution_data_screen.dart';
 import 'firebase_options.dart';
 
-//import './screens/login_auth.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
