@@ -1,6 +1,7 @@
 import 'package:air_pollution/Components/constants.dart';
 import 'package:air_pollution/Screens/air_pollution_detail.dart';
 import 'package:air_pollution/Screens/communiy_homepage.dart';
+import 'package:air_pollution/Screens/emergency_contact.dart';
 import 'package:air_pollution/Screens/users.dart';
 import 'package:air_pollution/Screens/loginscreen.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => UsersList()));
+                            builder: (context) => const UsersList()));
                       },
                       child: Container(
                         height: 50,
@@ -114,7 +115,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => CommunityHomePage()));
+                            builder: (context) => const CommunityHomePage()));
                       },
                       child: Container(
                         height: 50,
@@ -220,7 +221,9 @@ class _AdminScreenState extends State<AdminScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const About()));
+                                builder: (context) => const EmergencyContact(
+                                      role1: "admin",
+                                    )));
                       },
                       child: Container(
                         height: 50,
@@ -271,7 +274,8 @@ class _AdminScreenState extends State<AdminScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AirPollutionCausesPage()));
+                            builder: (context) =>
+                                const AirPollutionCausesPage()));
                       },
                       child: Container(
                         height: 50,
@@ -294,7 +298,7 @@ class _AdminScreenState extends State<AdminScreen> {
                             ),
                             Expanded(
                               child: Text(
-                                "Change Password",
+                                "Air pollution info",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,
@@ -372,6 +376,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   Future<void> signout(BuildContext ctx) async {
     Navigator.of(ctx).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (ctx) => LoginScreen()), (route) => false);
+        MaterialPageRoute(builder: (ctx) => const LoginScreen()),
+        (route) => false);
   }
 }

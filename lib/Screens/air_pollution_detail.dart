@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AirPollutionCausesPage extends StatelessWidget {
+  const AirPollutionCausesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

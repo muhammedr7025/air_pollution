@@ -84,8 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void userSignIn() async {
     if (emailIdController.text.trim() == "admin@admin.com" &&
         passController.text.trim() == "admin123") {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => AdminScreen()));
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const AdminScreen()));
     } else {
       showDialog(
           context: context,

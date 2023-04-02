@@ -2,7 +2,7 @@ import 'package:air_pollution/Components/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../UserDetails/UserName.dart';
+import '../UserDetails/user_name.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({super.key});
