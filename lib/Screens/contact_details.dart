@@ -30,7 +30,7 @@ class ContactDetails extends StatelessWidget {
               tileColor: primaryclr,
               trailing: role == "admin"
                   ? IconButton(onPressed: () {}, icon: const Icon(Icons.delete))
-                  : const SizedBox(),
+                  : IconButton(onPressed: () {}, icon: const Icon(Icons.call)),
             );
           }
           return const Text("Loading");

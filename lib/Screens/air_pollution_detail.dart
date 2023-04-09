@@ -7,12 +7,12 @@ class AirPollutionCausesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Causes of Air Pollution'),
+        title: const Text('Causes of Air Pollution'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Text(
                 'Industrial emissions: Factories, power plants, and other industrial facilities release pollutants into the air during their operations.'),
             Text(

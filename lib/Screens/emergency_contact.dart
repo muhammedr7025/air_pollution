@@ -42,17 +42,22 @@ class _EmergencyContactState extends State<EmergencyContact> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        actions: [
-          IconButton(
-            onPressed: signUserOut,
-            icon: const Icon(Icons.logout),
-          )
-        ],
-      ),
       body: Column(
         children: [
+          ListTile(
+            title: const Text(
+              'Emergency contact',
+              style: TextStyle(fontSize: 27),
+            ),
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 27,
+                )),
+          ),
           Expanded(
             child: FutureBuilder(
                 future: future,
@@ -68,13 +73,6 @@ class _EmergencyContactState extends State<EmergencyContact> {
                             userId: contactDetails[index],
                             role: widget.role1,
                           ),
-                          // trailing: IconButton(
-                          //     onPressed: () {
-                          //       setState(() {
-                          //         PostsDetails.removeAt(index);
-                          //       });
-                          //     },
-                          //     icon: Icon(Icons.delete)),
                         ),
                       );
                     },
@@ -94,7 +92,7 @@ class _EmergencyContactState extends State<EmergencyContact> {
                     Icons.add,
                   ),
                 )
-              : SizedBox()
+              : const SizedBox()
         ],
       ),
     );

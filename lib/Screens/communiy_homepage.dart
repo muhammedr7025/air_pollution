@@ -40,17 +40,22 @@ class _CommunityHomePageState extends State<CommunityHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[900],
-        actions: [
-          IconButton(
-            onPressed: signUserOut,
-            icon: const Icon(Icons.logout),
-          )
-        ],
-      ),
       body: Column(
         children: [
+          ListTile(
+            title: const Text(
+              'Community post',
+              style: TextStyle(fontSize: 27),
+            ),
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 27,
+                )),
+          ),
           Expanded(
             child: FutureBuilder(
                 future: future,
