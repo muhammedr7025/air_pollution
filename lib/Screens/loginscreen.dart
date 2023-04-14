@@ -1,4 +1,5 @@
 import 'package:air_pollution/Screens/admin_screen.dart';
+import 'package:air_pollution/Screens/users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../Components/TextField/text_field.dart';
 import 'Package:flutter/material.dart';
@@ -95,7 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailIdController.text.trim(),
           password: passController.text.trim());
-      Navigator.pop(context);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => UsersList()));
     }
   }
 
